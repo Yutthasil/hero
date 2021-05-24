@@ -4,12 +4,6 @@ var walkck = [0, 0];
 var myGamePiece;
 var meat = [];
 var tiger = [];
-function display() {
-  document.getElementById("stats").style.display = "none";
-  document.getElementById("canvas").style.display = "none";
-  document.getElementById("dshowto").style.display = "none";
-  document.getElementById("dshowto2").style.display = "none";
-}
 function howToPlay() {
   document.getElementById("dsplay").style.display = "none";
   document.getElementById("dshowto").style.display = "inline";
