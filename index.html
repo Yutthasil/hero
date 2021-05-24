@@ -58,12 +58,19 @@ hds{
   justify-content: center;
   text-align: center;
 }
-#stats, #canvas, #dshowto, #dshowto2{
+#stats, #canvas, #dshowto, #dshowto2, #goodend-page, #badend-page, #killed{
   display: none;
 }
 @keyframes moving {
-  from {left:200px;}
-  to {left:-200px;}
+  from {top:100px;}
+  to {top:0px;}
+}
+#tips{
+  width:300px;
+  /* background: white; */
+  text-align: center;
+  color: white
+
 }
         </style>
     </head>
@@ -115,8 +122,26 @@ hds{
           <button onclick="goMain()">MainMenu</button>
           <button onclick="howToPlay()"><</button>
         </interface>
+
+        <interface id="goodend-page">
+          <hds>Endding</hds>
+          <a class="button" href="https://meat-industry.netlify.app/">Endding</a>
+        </interface>
+
+        <interface id="badend-page">
+          <a class="button" href="https://meat-industry1.netlify.app/">Endding</a>
+        </interface>
+
+        <interface id="killed"><br>
+          <hds>Die</hds><br>
+          <h1>Try Again?</h1><br><br>
+          <button onclick="startGame()">Yes</button>
+          <a href="https://meat-industry.netlify.app/"><button>No</button></a>
+          <img src="" alt="">
+        </interface>
+
         <canvas id="canvas"></canvas>
-        <div id="stats" style="background-image: radial-gradient(circle, hsl(25, 34%, 40%), hsl(25, 27%, 52%), hsl(25, 34%, 40%)); height: 350px; margin:10px; border: 10px solid pink;border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;font-family: 'Amatic SC', cursive; font-size:large;color:white;">
+        <div id="stats" style="padding: 10px; background-image: radial-gradient(circle, hsl(25, 34%, 40%), hsl(25, 27%, 52%), hsl(25, 34%, 40%)); height: 350px; margin:10px; border: 10px solid pink;border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;font-family: 'Amatic SC', cursive; font-size:large;color:white;">
           <div id="progbar" style="width:300px; background: black">
             <div id="myprog" style="width:0%; height:30px; background-image: linear-gradient(hsl(80, 100%, 62%), hsl(90, 100%, 49%), hsl(80, 100%, 62%));"></div>
           </div>
@@ -128,10 +153,11 @@ hds{
             <h1 style="display: inline;"><img src="https://cdn.discordapp.com/attachments/820894723119644672/823580169188671508/MiniTree_1.gif" style="width:50px; margin:5px; display:inline-block;"><b id="vegg_count">: 0</b></h1>
           </div>
           <br></br>
-          <div style="background:white;width:300px;padding:1px;overflow:hidden;">
-              <h1 style="font-size:15px;left:300px;position:relative;color:green;animation: moving 10s infinite linear;">กินเนื้อให้น้อยกินผักให้มาก</h1>
+          <div id="tips">
+              <p>**กินเนื้อให้น้อยกินผักให้มาก**</p>
           </div>
         </div>
+
       </body>
 <script src="greenpea.js"></script>
 </html>
