@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Thasadith&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Srisakdi:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+body{
+  display:flex;
+  justify-content: center;
+  background: url(https://cdn.discordapp.com/attachments/796972397391511556/846280756840890388/sun-ju-park-2015-09-07.gif);
+}
+canvas {
+  border: 10px solid pink;
+  border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;
+  background-color: #f1f1f1;
+  background:url(https://cdn.discordapp.com/attachments/820894723119644672/839134812609577010/grassterrain.png);
+  background-size: 20%;
+}
+interface {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  text-align: center;
+  width: 600px;
+  height: 700px;
+  background-image:
+  linear-gradient(hsl(80, 100%, 62%),
+  hsl(80, 84%, 58%),hsl(50, 97%, 80%));
+  font-family: 'Chakra Petch', sans-serif;
+}
+button{
+  box-shadow:inset 0px 1px 0px 0px #f29c93;
+	background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
+	background-color:#fe1a00;
+	border-radius:20px;
+	border:1px solid #d83526;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:'Aldrich', sans-serif;
+	font-size:24px;
+	font-weight:bold;
+	padding:3px 23px;
+	text-decoration:none;
+	text-shadow:0px 1px 24px #b23e35;
+}
+
+hds{
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 32px;
+}
+#food{
+  display:flex;
+  justify-content: center;
+  text-align: center;
+}
+        </style>
+    </head>
+    <body onload="display()">
+
+        <interface id="dsplay" style="display:inline"><br><br>
+            <hds >เทพยุทธ์สุดจะคิดได้</hds><br><br>
+            <img  src="https://cdn.discordapp.com/attachments/820894723119644672/823820115678068746/Hero_clone_2.gif" style="width: 300px;; height: 300px;;"><br><br><br><br><br>
+            <button onclick="startGame()">Click here to START</button><br><br>
+            <button onclick="howToPlay()">How to play</button>
+        </interface>
+
+        <interface id="dshowto">
+          <hds>How to Play</hds>
+          <h2>คุณคือจอมยุทธ์!!! ผู้มีจิตใจดีงามที่จะช่วยเหลือผู้คนในหมู่บ้านที่หิวโหย คุณนั้นต้องการพลังพลังหาได้จากการกิน คุณจึงต้องเข้าป่าไปเพื่อเติมพลังของคุณและนำอาหารที่หามาได้กลับไปช่วยเหลือคนในหมู่บ้าน ไม่ให้อดอยากนั่นเอง</h2>
+          <h2 style="text-decoration: underline;">อาหารที่คุณหาได้ในป่า</h2>
+          <div id="food">
+            <figure>
+              <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif"
+                width="150" height="150">
+              <figcaption>เนื้อสัตว์</figcaption>
+              </figure>
+              <figure>
+              <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823580071829962823/MiniTree_1.gif"
+                width="150" height="150">
+              <figcaption>พืชผัก</figcaption>
+            </figure>
+          </div>
+          <button onclick="goMain()">MainMenu</button>
+          <button onclick="howToPlay2()">></button>
+        </interface>
+
+        <interface id="dshowto2">
+          <hds id="headhowto">How to Play</hds>
+          <h2>แน่นอนว่าป่าผืนนี้ไม่ได้โรยด้วยกลีบกุหลาบ ขึ้นชื่อว่าป่าแน่นอนว่าคุณจะต้องพบกับสัตว์ร้าย แต่ไม่ต้องห่วงหากคุณไม่ทำอะไรกับมันเรื่องร้ายคงไม่เกิด ภัยร้ายอีกนึงอย่างคือ Virus ที่จะทำให้จอมยุทธ์อ่อนแรงลง ขอให้คุณเดินทางอย่างปลอดภัยท่านจอมยุทธ์</h2>
+          <h2 style="text-decoration: underline;">ภัยร้ายต่างๆ</h2>
+          <div id="food">
+            <figure>
+              <p><img src="https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif"
+                width="150" height="150">
+              <figcaption>เสือ</figcaption>
+              </figure>
+              <figure>
+              <p><img src="https://cdn.discordapp.com/attachments/796972397391511556/838459515124056134/New_Virus_clone.gif"
+                width="150" height="150">
+              <figcaption>Virus</figcaption>
+            </figure>
+          </div>
+          <button onclick="goMain()">MainMenu</button>
+          <button onclick="howToPlay()"><</button>
+        </interface>
+        <canvas id="canvas"></canvas>
+        <div id="stats" style="background: white;">
+          <div id="progbar" style="width:200px; background: #ddd">
+            <div id="myprog" style="width:0%; height:30px; background:#04AA6D"></div>
+          </div>
+          <h1 id="hp" style="display:block; margin:3px;"></h1><br>
+          <div> 
+            <img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif" style="width:50px; margin:5px;">
+          </div><br>
+          <div> <img src="https://cdn.discordapp.com/attachments/820894723119644672/823580169188671508/MiniTree_1.gif" style="width:50px; margin:5px;"></div>
+        </div>
+      </body>
+<script src="greenpea.js">
+</script>
+</html>
