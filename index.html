@@ -61,6 +61,10 @@ hds{
 #stats, #canvas, #dshowto, #dshowto2{
   display: none;
 }
+@keyframes moving {
+  from {left:200px;}
+  to {left:-200px;}
+}
         </style>
     </head>
     <body onload="display()">
@@ -113,7 +117,7 @@ hds{
         </interface>
         <canvas id="canvas"></canvas>
         <div id="stats" style="background-image: radial-gradient(circle, hsl(25, 34%, 40%), hsl(25, 27%, 52%), hsl(25, 34%, 40%)); height: 350px; margin:10px; border: 10px solid pink;border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;font-family: 'Amatic SC', cursive; font-size:large;color:white;">
-          <div id="progbar" style="width:200px; background: black">
+          <div id="progbar" style="width:300px; background: black">
             <div id="myprog" style="width:0%; height:30px; background-image: linear-gradient(hsl(80, 100%, 62%), hsl(90, 100%, 49%), hsl(80, 100%, 62%));"></div>
           </div>
           <h1 id="hp" style="display:block; margin:3px;"></h1><br>
@@ -122,7 +126,11 @@ hds{
           </div>
           <div>
             <h1 style="display: inline;"><img src="https://cdn.discordapp.com/attachments/820894723119644672/823580169188671508/MiniTree_1.gif" style="width:50px; margin:5px; display:inline-block;"><b id="vegg_count">: 0</b></h1>
-        </div>
+          </div>
+          <br></br>
+          <div style="background:white;width:200px;padding:1px;overflow:hidden;">
+              <h1 style="font-size:15px;left:200px;position:relative;color:green;animation: moving 10s infinite linear;">กินเนื้อให้น้อยกินผักให้มาก</h1>
+          </div>
         </div>
       </body>
 <script src="greenpea.js"></script>
