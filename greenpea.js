@@ -3,6 +3,8 @@ var current = 0;
 var uhp = 3;
 var walkck = [0, 0];
 var myGamePiece;
+var veggcount = 0;
+var meatcount = 0;
 var meat = [], veggie = [], tiger = [], virus = [];
 function howToPlay() {
   document.getElementById("dsplay").style.display = "none";
@@ -18,11 +20,13 @@ function goMain() {
   document.getElementById("dsplay").style.display = "inline";
   document.getElementById("dshowto").style.display = "none";
   document.getElementById("dshowto2").style.display = "none";
+  document.getElementById("killed").style.display = "none";
 }
 function startGame() {
   document.getElementById("dsplay").style.display = "none";
   document.getElementById("dshowto").style.display = "none";
   document.getElementById("dshowto2").style.display = "none";
+  document.getElementById("killed").style.display = "none";
   document.getElementById("canvas").style.display = "initial";
   document.getElementById("stats").style.display = "block";
   myGameArea.start();
@@ -44,6 +48,10 @@ var myGameArea = { //เขียนหน้าต่างเกม
     start : function() {
         score = 0;
         uhp = 3;
+        veggcount = 0;
+        meatcount = 0;
+        document.getElementById("meat_count").innerHTML =": 0";
+        document.getElementById("vegg_count").innerHTML = ": 0";
         document.getElementById("hp").innerHTML = "Hp:"+"💗".repeat(uhp);
         this.canvas.width = 500;
         this.canvas.height = 701;
@@ -104,8 +112,7 @@ function component(width, height, color, x, y, type) { //สถานะplayer
       this.y = Math.floor(Math.random() * 650);
     }
 }
-var veggcount = 0;
-var meatcount = 0;
+
 
 function updateGameArea(){
   var mytop = myGamePiece.y + 12;
@@ -284,7 +291,7 @@ for (let i = 0; i < 2; i++){
     if ((mybottom >= meat[i].y && myright >= meat[i].x && mytop <= (meat[i].y+meat[i].height) && myleft <= meat[i].x + meat[i].width) || 
       (mytop <= (meat[i].y + meat[i].height) && myright >= meat[i].x && mybottom >= meat[i].y && myleft <= meat[i].x + meat[i].width)){
         score += 5
-        document.getElementById("meat_count").innerHTML =":"+(meatcount+=1);
+        document.getElementById("meat_count").innerHTML =": "+(meatcount+=1);
         meat[i].newPosf();
       }
     }
@@ -294,7 +301,7 @@ for (let i = 0; i < 2; i++){
         if ((mybottom >= veggie[i].y && myright >= veggie[i].x && mytop <= (veggie[i].y+veggie[i].height) && myleft <= veggie[i].x + veggie[i].width) || 
           (mytop <= (veggie[i].y + veggie[i].height) && myright >= veggie[i].x && mybottom >= veggie[i].y && myleft <= veggie[i].x + veggie[i].width)){
             score += 2
-            document.getElementById("vegg_count").innerHTML = ":"+(veggcount += 1);
+            document.getElementById("vegg_count").innerHTML = ": "+(veggcount += 1);
             veggie[i].newPosf();
           }
         }
@@ -304,14 +311,23 @@ for (let i = 0; i < 2; i++){
         else if (current > score){
             document.getElementById("myprog").style.width = (current -= 1) + "%"
         }
-        if (current >= 100){
-          myGameArea.reset();
-      }
-    if (uhp == 0){
+    if (current >= 100){
         myGameArea.clear();
         myGameArea.reset();
-        document.getElementById("dsplay").style.display = "inline";
+        if (veggcount > meatcount){
+          document.getElementById("goodend-page").style.display = "inline";
+        }
+        else{
+          document.getElementById("badend-page").style.display = "inline"
+        }
         document.getElementById("stats").style.display = "none";
         document.getElementById("canvas").style.display = "none";
+    }
+    else if (uhp == 0){
+      myGameArea.clear();
+      myGameArea.reset();
+      document.getElementById("killed").style.display = "inline"
+      document.getElementById("stats").style.display = "none";
+      document.getElementById("canvas").style.display = "none";
     }
 }
