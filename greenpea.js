@@ -2,10 +2,15 @@ var score = 0;
 var current = 0;
 var uhp = 3;
 var walkck = [0, 0];
-var myGamePiece;
 var veggcount = 0;
 var meatcount = 0;
 var meat = [], veggie = [], tiger = [], virus = [];
+var Keys = {
+  up: false,
+  down: false,
+  left: false,
+  right: false
+};
 function howToPlay() {
   document.getElementById("dsplay").style.display = "none";
   document.getElementById("dshowto").style.display = "inline";
@@ -59,12 +64,19 @@ var myGameArea = { //เขียนหน้าต่างเกม
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 20);
         window.addEventListener('keydown', function (e) {
-            myGameArea.key = e.keyCode;
+          if (e.keyCode == 37) Keys.left = true
+          if (e.keyCode == 39) Keys.right = true
+          if (e.keyCode == 38) Keys.up = true
+          if (e.keyCode == 40) Keys.down = true
         })
         window.addEventListener('keyup', function (e) {
-            myGameArea.key = false;
+            if (e.keyCode == 37) Keys.left = false
+            if (e.keyCode == 39) Keys.right = false
+            if (e.keyCode == 38) Keys.up = false
+            if (e.keyCode == 40) Keys.down = false
         })
     },
+    
     reset : function(){
       clearInterval(this.interval);
     },
@@ -113,8 +125,8 @@ function component(width, height, color, x, y, type) { //สถานะplayer
     }
 }
 
-
 function updateGameArea(){
+
   var mytop = myGamePiece.y + 12;
   var mybottom = myGamePiece.y + (myGamePiece.height);
   var myleft = myGamePiece.x;
@@ -123,126 +135,120 @@ function updateGameArea(){
   var virusbottom = [virus[0].y + (virus[0].height), virus[1].y + (virus[1].height)]
   var virusleft = [virus[0].x, virus[1].x]
   var virusright = [virus[0].x + virus[0].width, virus[1].x + virus[1].width]
-  
 
-myGameArea.clear()
-myGamePiece.speedX = 0;
-myGamePiece.speedY = 0;
-virus[0].speedX = 0;
-virus[0].speedY = 0;
-virus[1].speedX = 0;
-virus[1].speedY = 0;
+  myGameArea.clear()
 
   if(mytop > 0 && mybottom < 701 && myleft > 0 && myright < 500){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -3; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 3; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -3; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 3; }
+    if (Keys.left) {myGamePiece.x -= 3; }
+    if (Keys.right) {myGamePiece.x += 3; }
+    if (Keys.up) {myGamePiece.y -= 3; }
+    if (Keys.down) {myGamePiece.y += 3; }
   }
   else if(mytop == 0 && myleft == 0){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = 0; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 3; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = 0; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 3; }
+    if (Keys.left) {myGamePiece.x += 0; }
+    if (Keys.right) {myGamePiece.x += 3; }
+    if (Keys.up) {myGamePiece.y += 0; }
+    if (Keys.down) {myGamePiece.y += 3; }
   }
   else if(mytop == 0 && myright == 500){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -3; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 0; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = 0; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 3; }
+    if (Keys.left) {myGamePiece.x -= 3; }
+    if (Keys.right) {myGamePiece.x += 0; }
+    if (Keys.up) {myGamePiece.y += 0; }
+    if (Keys.down) {myGamePiece.y += 3; }
   }
   else if(mybottom == 701 && myright == 500){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -3; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 0; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -3; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 0; }
+    if (Keys.left) {myGamePiece.x -= 3; }
+    if (Keys.right) {myGamePiece.x += 0; }
+    if (Keys.up) {myGamePiece.y -= 3; }
+    if (Keys.down) {myGamePiece.y += 0; }
   }
   else if(mybottom == 701 && myleft == 0){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = 0; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 3; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -3; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 0; }
+    if (Keys.left) {myGamePiece.x += 0; }
+    if (Keys.right) {myGamePiece.x += 3; }
+    if (Keys.up) {myGamePiece.y -= 3; }
+    if (Keys.down) {myGamePiece.y += 0; }
   }
   else if(mytop == 0){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -3; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 3; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = 0; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 3; }
+    if (Keys.left) {myGamePiece.x -= 3; }
+    if (Keys.right) {myGamePiece.x += 3; }
+    if (Keys.up) {myGamePiece.y += 0; }
+    if (Keys.down) {myGamePiece.y += 3; }
   }
   else if(myleft == 0){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = 0; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 3; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -3; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 3; }
+    if (Keys.left) {myGamePiece.x += 0; }
+    if (Keys.right) {myGamePiece.x += 3; }
+    if (Keys.up) {myGamePiece.y -= 3; }
+    if (Keys.down) {myGamePiece.y += 3; }
   }
   else if(myright == 500){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -3; }
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 0; }
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -3; }
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 3; }
+    if (Keys.left) {myGamePiece.x -= 3; }
+    if (Keys.right) {myGamePiece.x += 0; }
+    if (Keys.up) {myGamePiece.y -= 3; }
+    if (Keys.down) {myGamePiece.y += 3; }
   }
   else if(mybottom == 701){
-    if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -3; }//l
-    if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 3; }//r
-    if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -3; }//u
-    if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 0; }//d
+    if (Keys.left) {myGamePiece.x -= 3; }//l
+    if (Keys.right) {myGamePiece.x += 3; }//r
+    if (Keys.up) {myGamePiece.y -= 3; }//u
+    if (Keys.down) {myGamePiece.y += 0; }//d
     }
 myGamePiece.newPos();    
-myGamePiece.update();  
+myGamePiece.update();
+
 for (let i = 0; i < 2; i++){
   if(virustop[i] > 0 && virusbottom[i] < 701 && virusleft[i] > 0 && virusright[i] < 500){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 3; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = -3; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 3; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = -3; }
+      if (Keys.left) {virus[i].x += 3; }
+      if (Keys.right) {virus[i].x -= 3; }
+      if (Keys.up) {virus[i].y += 3; }
+      if (Keys.down) {virus[i].y -= 3; }
     }
-    else if(virustop[i] == 0 && virusleft[i] == 0){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 3; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = 0; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 3; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = 0; }
+    else if(virustop[i] <= 0 && virusleft[i] <= 0){
+      if (Keys.left) {virus[i].x += 3; }
+      if (Keys.right) {virus[i].x += 0; }
+      if (Keys.up) {virus[i].y += 3; }
+      if (Keys.down) {virus[i].y += 0; }
     }
-    else if(virustop[i] == 0 && virusright[i] == 500){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 0; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = -3; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 3; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = 0; }
+    else if(virustop[i] <= 0 && virusright[i] >= 500){
+      if (Keys.left) {virus[i].x += 0; }
+      if (Keys.right) {virus[i].x -= 3; }
+      if (Keys.up) {virus[i].y += 3; }
+      if (Keys.down) {virus[i].y += 0; }
     }
-    else if(virusbottom[i] == 701 && virusright[i] == 500){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 0; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = -3; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 0; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = -3; }
+    else if(virusbottom[i] >= 701 && virusright[i] >= 500){
+      if (Keys.left) {virus[i].x += 0; }
+      if (Keys.right) {virus[i].x -= 3; }
+      if (Keys.up) {virus[i].y += 0; }
+      if (Keys.down) {virus[i].y -= 3; }
     }
-    else if(virusbottom[i] == 701 && virusleft[i] == 0){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 3; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = 0; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 0; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = -3; }
+    else if(virusbottom[i] >= 701 && virusleft[i] <= 0){
+      if (Keys.left) {virus[i].x += 3; }
+      if (Keys.right) {virus[i].x += 0; }
+      if (Keys.up) {virus[i].y += 0; }
+      if (Keys.down) {virus[i].y -= 3; }
     }
-    else if(virustop[i] == 0){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 3; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = -3; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 3; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = 0; }
+    else if(virustop[i] <= 0){
+      if (Keys.left) {virus[i].x += 3; }
+      if (Keys.right) {virus[i].x -= 3; }
+      if (Keys.up) {virus[i].y += 3; }
+      if (Keys.down) {virus[i].y += 0; }
     }
-    else if(virusleft[i] == 0){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 3; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = 0; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 3; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = -3; }
+    else if(virusleft[i] <= 0){
+      if (Keys.left) {virus[i].x += 3; }
+      if (Keys.right) {virus[i].x += 0; }
+      if (Keys.up) {virus[i].y += 3; }
+      if (Keys.down) {virus[i].y -= 3; }
     }
-    else if(virusright[i] == 500){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 0; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = -3; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 3; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = -3; }
+    else if(virusright[i] >= 500){
+      if (Keys.left) {virus[i].x += 0; }
+      if (Keys.right) {virus[i].x -= 3; }
+      if (Keys.up) {virus[i].y += 3; }
+      if (Keys.down) {virus[i].y -= 3; }
     }
-    else if(virusbottom[i] == 701){
-      if (myGameArea.key && myGameArea.key == 37) {virus[i].speedX = 3; }
-      if (myGameArea.key && myGameArea.key == 39) {virus[i].speedX = -3; }
-      if (myGameArea.key && myGameArea.key == 38) {virus[i].speedY = 0; }
-      if (myGameArea.key && myGameArea.key == 40) {virus[i].speedY = -3; }
+    else if(virusbottom[i] >= 701){
+      if (Keys.left) {virus[i].x += 3; }
+      if (Keys.right) {virus[i].x -= 3; }
+      if (Keys.up) {virus[i].y += 0; }
+      if (Keys.down) {virus[i].y -= 3; }
       }
   virus[i].newPos();    
   virus[i].update();
