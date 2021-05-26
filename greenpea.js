@@ -1,7 +1,6 @@
 var score = 0;
 var current = 0;
 var uhp = 3;
-var walkck = [0, 0];
 var veggcount = 0;
 var meatcount = 0;
 var meat = [], veggie = [], tiger = [], virus = [];
@@ -37,9 +36,9 @@ function startGame() {
   myGameArea.start();
   myGamePiece = new component(50, 50, "https://cdn.discordapp.com/attachments/820894723119644672/823820115678068746/Hero_clone_2.gif",225,651, "image");
   tiger[0] = new component(60, 60, "https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif", 0, 400, "enemy");
-  tiger[1] = new component(60, 60, "https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif", 0, 200, "enemy");
-  virus[0] = new component(50, 50, "https://cdn.discordapp.com/attachments/820894723119644672/846266479683043358/New_Virus.gif", 0, 0, "enemy");
-  virus[1] = new component(50, 50, "https://cdn.discordapp.com/attachments/820894723119644672/846335242508042240/New_Virus_clone_1.gif", 450, 0, "enemy");
+  tiger[1] = new component(60, 60, "https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif", 450, 200, "enemy");
+  virus[0] = new component(50, 50, "https://cdn.discordapp.com/attachments/820894723119644672/846266479683043358/New_Virus.gif", 75, 50, "enemy");
+  virus[1] = new component(50, 50, "https://cdn.discordapp.com/attachments/820894723119644672/846335242508042240/New_Virus_clone_1.gif", 0, 250, "enemy");
   for (let i = 0; i < 5; i++){
     meat[i] = new component(30, 30, "https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif", 0, 0, "food");
   }
@@ -76,14 +75,12 @@ var myGameArea = { //เขียนหน้าต่างเกม
             if (e.keyCode == 40) Keys.down = false
         })
     },
-    
     reset : function(){
       clearInterval(this.interval);
     },
     clear : function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-    
 }
 
 
@@ -192,111 +189,116 @@ function updateGameArea(){
     if (Keys.up) {myGamePiece.y -= 3; }//u
     if (Keys.down) {myGamePiece.y += 0; }//d
     }
-myGamePiece.newPos();    
-myGamePiece.update();
+  myGamePiece.newPos();    
+  myGamePiece.update();
 
-for (let i = 0; i < 2; i++){
-  if(virustop[i] > 0 && virusbottom[i] < 701 && virusleft[i] > 0 && virusright[i] < 500){
-      if (Keys.left) {virus[i].x += 3; }
-      if (Keys.right) {virus[i].x -= 3; }
-      if (Keys.up) {virus[i].y += 3; }
-      if (Keys.down) {virus[i].y -= 3; }
-    }
-    else if(virustop[i] <= 0 && virusleft[i] <= 0){
-      if (Keys.left) {virus[i].x += 3; }
-      if (Keys.right) {virus[i].x += 0; }
-      if (Keys.up) {virus[i].y += 3; }
-      if (Keys.down) {virus[i].y += 0; }
-    }
-    else if(virustop[i] <= 0 && virusright[i] >= 500){
-      if (Keys.left) {virus[i].x += 0; }
-      if (Keys.right) {virus[i].x -= 3; }
-      if (Keys.up) {virus[i].y += 3; }
-      if (Keys.down) {virus[i].y += 0; }
-    }
-    else if(virusbottom[i] >= 701 && virusright[i] >= 500){
-      if (Keys.left) {virus[i].x += 0; }
-      if (Keys.right) {virus[i].x -= 3; }
-      if (Keys.up) {virus[i].y += 0; }
-      if (Keys.down) {virus[i].y -= 3; }
-    }
-    else if(virusbottom[i] >= 701 && virusleft[i] <= 0){
-      if (Keys.left) {virus[i].x += 3; }
-      if (Keys.right) {virus[i].x += 0; }
-      if (Keys.up) {virus[i].y += 0; }
-      if (Keys.down) {virus[i].y -= 3; }
-    }
-    else if(virustop[i] <= 0){
-      if (Keys.left) {virus[i].x += 3; }
-      if (Keys.right) {virus[i].x -= 3; }
-      if (Keys.up) {virus[i].y += 3; }
-      if (Keys.down) {virus[i].y += 0; }
-    }
-    else if(virusleft[i] <= 0){
-      if (Keys.left) {virus[i].x += 3; }
-      if (Keys.right) {virus[i].x += 0; }
-      if (Keys.up) {virus[i].y += 3; }
-      if (Keys.down) {virus[i].y -= 3; }
-    }
-    else if(virusright[i] >= 500){
-      if (Keys.left) {virus[i].x += 0; }
-      if (Keys.right) {virus[i].x -= 3; }
-      if (Keys.up) {virus[i].y += 3; }
-      if (Keys.down) {virus[i].y -= 3; }
-    }
-    else if(virusbottom[i] >= 701){
-      if (Keys.left) {virus[i].x += 3; }
-      if (Keys.right) {virus[i].x -= 3; }
-      if (Keys.up) {virus[i].y += 0; }
-      if (Keys.down) {virus[i].y -= 3; }
-      }
-  virus[i].newPos();    
-  virus[i].update();
-  }
+// for (let i = 0; i < 2; i++){
+//   if(virustop[i] > 0 && virusbottom[i] < 701 && virusleft[i] > 0 && virusright[i] < 500){
+//       if (Keys.left) {virus[i].x += 3; }
+//       if (Keys.right) {virus[i].x -= 3; }
+//       if (Keys.up) {virus[i].y += 3; }
+//       if (Keys.down) {virus[i].y -= 3; }
+//     }
+//     else if(virustop[i] <= 0 && virusleft[i] <= 0){
+//       if (Keys.left) {virus[i].x += 3; }
+//       if (Keys.right) {virus[i].x += 0; }
+//       if (Keys.up) {virus[i].y += 3; }
+//       if (Keys.down) {virus[i].y += 0; }
+//     }
+//     else if(virustop[i] <= 0 && virusright[i] >= 500){
+//       if (Keys.left) {virus[i].x += 0; }
+//       if (Keys.right) {virus[i].x -= 3; }
+//       if (Keys.up) {virus[i].y += 3; }
+//       if (Keys.down) {virus[i].y += 0; }
+//     }
+//     else if(virusbottom[i] >= 701 && virusright[i] >= 500){
+//       if (Keys.left) {virus[i].x += 0; }
+//       if (Keys.right) {virus[i].x -= 3; }
+//       if (Keys.up) {virus[i].y += 0; }
+//       if (Keys.down) {virus[i].y -= 3; }
+//     }
+//     else if(virusbottom[i] >= 701 && virusleft[i] <= 0){
+//       if (Keys.left) {virus[i].x += 3; }
+//       if (Keys.right) {virus[i].x += 0; }
+//       if (Keys.up) {virus[i].y += 0; }
+//       if (Keys.down) {virus[i].y -= 3; }
+//     }
+//     else if(virustop[i] <= 0){
+//       if (Keys.left) {virus[i].x += 3; }
+//       if (Keys.right) {virus[i].x -= 3; }
+//       if (Keys.up) {virus[i].y += 3; }
+//       if (Keys.down) {virus[i].y += 0; }
+//     }
+//     else if(virusleft[i] <= 0){
+//       if (Keys.left) {virus[i].x += 3; }
+//       if (Keys.right) {virus[i].x += 0; }
+//       if (Keys.up) {virus[i].y += 3; }
+//       if (Keys.down) {virus[i].y -= 3; }
+//     }
+//     else if(virusright[i] >= 500){
+//       if (Keys.left) {virus[i].x += 0; }
+//       if (Keys.right) {virus[i].x -= 3; }
+//       if (Keys.up) {virus[i].y += 3; }
+//       if (Keys.down) {virus[i].y -= 3; }
+//     }
+//     else if(virusbottom[i] >= 701){
+//       if (Keys.left) {virus[i].x += 3; }
+//       if (Keys.right) {virus[i].x -= 3; }
+//       if (Keys.up) {virus[i].y += 0; }
+//       if (Keys.down) {virus[i].y -= 3; }
+//       }
+//   virus[i].newPos();    
+//   virus[i].update();
+//   }
+    if (virus[0].x == 75 && virus[0].y == 50) {virus[0].speedX = 0; virus[0].speedY = 10}
+    if (virus[0].x == 75 && virus[0].y == 600) {virus[0].speedX = 5; virus[0].speedY = 0}
+    if (virus[0].x == 375 && virus[0].y == 600) {virus[0].speedX = 0; virus[0].speedY = -10}
+    if (virus[0].x == 375 && virus[0].y == 50) {virus[0].speedX = -5; virus[0].speedY = 0}
+    virus[0].newPos();
+    virus[0].update();
+    if (virus[1].x == 0 && virus[1].y == 250) {virus[1].speedX = 6; virus[1].speedY = 0}
+    if (virus[1].x == 450 && virus[1].y == 250) {virus[1].speedX = 0; virus[1].speedY = 5}
+    if (virus[1].x == 450 && virus[1].y == 360) {virus[1].speedX = -6; virus[1].speedY = 0}
+    if (virus[1].x == 0 && virus[1].y == 360) {virus[1].speedX = 0; virus[1].speedY = -5}
+    virus[1].newPos();
+    virus[1].update();
 
-    for (let i = 0; i < 2; i++){
-        tiger[i].newPos();
-        tiger[i].update();
-        if(tiger[i].x+tiger[i].width >= 500){
-            walkck[i] = 1;
-        }
-        else if(tiger[i].x <= 0){
-            walkck[i] = 0;
-        }
-        if (mybottom >= tiger[i].y + 10 && myright >= tiger[i].x + 10 && mytop <= (tiger[i].y+tiger[i].height - 10) && myleft <= tiger[i].x + tiger[i].width - 10){
-            myGamePiece.x = 225;
-            myGamePiece.y = 651;
-            document.getElementById("hp").innerHTML = "Hp:"+"💗".repeat(uhp-=1); 
-        }
-        if (mybottom >= virustop[0] + 10 && myright >= virusleft[0] + 10 && mytop <= (virusbottom[0] - 10) && myleft <= virusright[0] - 10){
-            virus[0].x = 0;
-            virus[0].y = 0;
-            score = 0;
-        }
-        if (mybottom >= virustop[1] + 10 && myright >= virusleft[1] + 10 && mytop <= (virusbottom[1] - 10) && myleft <= virusright[1] - 10){
-          virus[1].x = 0;
-          virus[1].y = 651;
-          score = 0;
-      }
-    }
-    if (walkck[0] == 0){
-        tiger[0].x += 6;
-    }
-    else{
-        tiger[0].x -= 4;
-    }
-    if (walkck[1] == 0){
-        tiger[1].x += 5;
-    }
-    else{
-        tiger[1].x -= 6;
-    }
+    if (tiger[0].x == 0) {tiger[0].speedX = 6;}
+    if (tiger[0].x == 450) {tiger[0].speedX = -5}
+    if (tiger[1].x == 0) {tiger[1].speedX = 5}
+    if (tiger[1].x == 450) {tiger[1].speedX = -6}
+    tiger[0].newPos();
+    tiger[0].update();
+    tiger[1].newPos();
+    tiger[1].update();
 
+    if ((mybottom >= tiger[0].y + 10 && myright >= tiger[0].x + 10 && mytop <= (tiger[0].y+tiger[0].height - 10) && myleft <= tiger[0].x + tiger[0].width - 10) ||
+        (mybottom >= tiger[1].y + 10 && myright >= tiger[1].x + 10 && mytop <= (tiger[1].y+tiger[1].height - 10) && myleft <= tiger[1].x + tiger[1].width - 10)){
+        myGamePiece.x = 225;
+        myGamePiece.y = 651;
+        document.getElementById("hp").innerHTML = "Hp:"+"💗".repeat(uhp-=1); 
+    }
+    if (mybottom >= virustop[0] + 10 && myright >= virusleft[0] + 10 && mytop <= (virusbottom[0] - 10) && myleft <= virusright[0] - 10){
+        myGamePiece.x = 225;
+        myGamePiece.y = 651;
+        virus[0].x = 75;
+        virus[0].y = 50;
+        document.getElementById("hp").innerHTML = "Hp:"+"💗".repeat(uhp-=1); 
+        score = 0;
+    }
+    if (mybottom >= virustop[1] + 10 && myright >= virusleft[1] + 10 && mytop <= (virusbottom[1] - 10) && myleft <= virusright[1] - 10){
+        myGamePiece.x = 225;
+        myGamePiece.y = 651;
+        virus[1].x = 0;
+        virus[1].y = 250;
+        document.getElementById("hp").innerHTML = "Hp:"+"💗".repeat(uhp-=1); 
+        score = 0;
+    }
   for (let i = 0 ; i < 5; i++){
     meat[i].update();
     if ((mybottom >= meat[i].y && myright >= meat[i].x && mytop <= (meat[i].y+meat[i].height) && myleft <= meat[i].x + meat[i].width) || 
       (mytop <= (meat[i].y + meat[i].height) && myright >= meat[i].x && mybottom >= meat[i].y && myleft <= meat[i].x + meat[i].width)){
-        score += 5
+        score += 3
         document.getElementById("meat_count").innerHTML =": "+(meatcount+=1);
         meat[i].newPosf();
       }
@@ -306,7 +308,7 @@ for (let i = 0; i < 2; i++){
         veggie[i].update();
         if ((mybottom >= veggie[i].y && myright >= veggie[i].x && mytop <= (veggie[i].y+veggie[i].height) && myleft <= veggie[i].x + veggie[i].width) || 
           (mytop <= (veggie[i].y + veggie[i].height) && myright >= veggie[i].x && mybottom >= veggie[i].y && myleft <= veggie[i].x + veggie[i].width)){
-            score += 2
+            score += 1
             document.getElementById("vegg_count").innerHTML = ": "+(veggcount += 1);
             veggie[i].newPosf();
           }
