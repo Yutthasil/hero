@@ -1,163 +1,203 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Thasadith&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Srisakdi:wght@700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Thasadith&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Srisakdi:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
     <style>
-body{
-  display:flex;
-  justify-content: center;
-  background: url(https://cdn.discordapp.com/attachments/796972397391511556/846280756840890388/sun-ju-park-2015-09-07.gif);
-}
-canvas {
-  border: 10px solid pink;
-  border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;
-  background-color: #f1f1f1;
-  background:url(https://cdn.discordapp.com/attachments/820894723119644672/839134812609577010/grassterrain.png);
-  background-size: 20%;
-}
-interface {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content:center;
-  text-align: center;
-  width: 600px;
-  height: 700px;
-  background-image:
-  linear-gradient(hsl(80, 100%, 62%),
-  hsl(80, 84%, 58%),hsl(50, 97%, 80%));
-  font-family: 'Chakra Petch', sans-serif;
-}
-button{
-  box-shadow:inset 0px 1px 0px 0px #f29c93;
-	background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
-	background-color:#fe1a00;
-	border-radius:20px;
-	border:1px solid #d83526;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:'Aldrich', sans-serif;
-	font-size:24px;
-	font-weight:bold;
-	padding:3px 23px;
-	text-decoration:none;
-	text-shadow:0px 1px 24px #b23e35;
-}
+        *{
+            position:relative;
+        }
+        body{
+            display:flex;
+            justify-content: center;
+            background: url(https://cdn.discordapp.com/attachments/796972397391511556/846280756840890388/sun-ju-park-2015-09-07.gif);
+        }
+        canvas {
+            border: 10px solid pink;
+            border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;
+            background-color: #f1f1f1;
+            background:url(https://cdn.discordapp.com/attachments/820894723119644672/839134812609577010/grassterrain.png);
+            background-size: 20%;
+        }
+        interface {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:center;
+            text-align: center;
+            padding:30px;
+            width: 600px;
+            height: 600px;
+            border: 15px solid;
+            border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;
+            background-image: radial-gradient(#D09D7B, #886248 );
+            font-family: 'Chakra Petch', sans-serif;
+        }
+        button{
+            background-color:#E3C6AD;
+            border-radius:20px;
+            border:1px solid #D09D7B;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:'Aldrich', sans-serif;
+            font-size:24px;
+            font-weight:bold;
+            padding:3px 23px;
+            text-decoration:none;
+            text-shadow:0px 1px 24px #b23e35;
+        }
+        button:hover{
+            animation: cursorover infinite linear 0.4s;
+        }
+        button:active{
+            transform: scale(0.95);
+        }
+        hds{
+            font-family: 'Chakra Petch', sans-serif;
+            color:#E3C6AD;
+            font-size: 32px;
+        }
+        #food{
+            display:flex;
+            justify-content: center;
+            text-align: center;
+            font-weight:bold;
+        }
+        #stats, #canvas, #dshowto, #dshowto2, #goodend-page, #badend-page, #killed, #meat-info, #veget-info, #tiger-info, #virus-info{
+            display: none;
+        }
+        @keyframes moving {
+            from {top:100px;}
+            to {top:0px;}
+        }
+        @keyframes cursorover {
+            50%{
+                transform: scale(1.1);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        #tips{
+            width:300px;
+            text-align: center;
+            color: white
+        }
+        span{
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px;
+            background: #B67B65;
+        }
 
-hds{
-  font-family: 'Chakra Petch', sans-serif;
-  font-size: 32px;
-}
-#food{
-  display:flex;
-  justify-content: center;
-  text-align: center;
-}
-#stats, #canvas, #dshowto, #dshowto2, #goodend-page, #badend-page, #killed{
-  display: none;
-}
-@keyframes moving {
-  from {top:100px;}
-  to {top:0px;}
-}
-#tips{
-  width:300px;
-  /* background: white; */
-  text-align: center;
-  color: white
+    </style>
+</head>
+<body onload="display()">
+    <interface id="dsplay" style="display:inline">
+        <hds >ADAPTICUS</hds><br><br>
+        <img  src="https://cdn.discordapp.com/attachments/820894723119644672/823820115678068746/Hero_clone_2.gif" style="width: 300px;; height: 300px;;"><br><br><br><br><br>
+        <button onclick="startGame()">Click here to START</button><br><br>
+        <button onclick="howToPlay()">How to play</button><br><br>
+        <a href="https://meat-industry1.netlify.app/" style="margin:5px;"><button>Campagne</button></a>
+    </interface>
 
-}
-        </style>
-    </head>
-    <body onload="display()">
-
-        <interface id="dsplay" style="display:inline"><br><br>
-            <hds >เทพยุทธ์สุดจะคิดได้</hds><br><br>
-            <img  src="https://cdn.discordapp.com/attachments/820894723119644672/823820115678068746/Hero_clone_2.gif" style="width: 300px;; height: 300px;;"><br><br><br><br><br>
-            <button onclick="startGame()">Click here to START</button><br><br>
-            <button onclick="howToPlay()">How to play</button>
-        </interface>
-
-        <interface id="dshowto">
-          <hds>How to Play</hds>
-          <h2>คุณคือจอมยุทธ์!!! ผู้มีจิตใจดีงามที่จะช่วยเหลือผู้คนในหมู่บ้านที่หิวโหย คุณนั้นต้องการพลังพลังหาได้จากการกิน คุณจึงต้องเข้าป่าไปเพื่อเติมพลังของคุณและนำอาหารที่หามาได้กลับไปช่วยเหลือคนในหมู่บ้าน ไม่ให้อดอยากนั่นเอง</h2>
-          <h2 style="text-decoration: underline;">อาหารที่คุณหาได้ในป่า</h2>
-          <div id="food">
+    <interface id="dshowto">
+        <hds>How to Play</hds>
+        <h2>Use<span>◀</span><span>▲</span><span>▼</span><span>▶</span>to control your character</h2>
+        <h2>You will find these things in the jungle</h2>
+        <div id="food">
             <figure>
-              <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif"
-                width="150" height="150">
-              <figcaption>เนื้อสัตว์</figcaption>
-              </figure>
-              <figure>
-              <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823580071829962823/MiniTree_1.gif"
-                width="150" height="150">
-              <figcaption>พืชผัก</figcaption>
+                <p style="cursor:pointer"><img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif" width="100" onclick="meatinfo()">
+                <figcaption>Meat</figcaption>
             </figure>
-          </div>
-          <button onclick="goMain()">MainMenu</button>
-          <button onclick="howToPlay2()">></button>
-        </interface>
-
-        <interface id="dshowto2">
-          <hds id="headhowto">How to Play</hds>
-          <h2>แน่นอนว่าป่าผืนนี้ไม่ได้โรยด้วยกลีบกุหลาบ ขึ้นชื่อว่าป่าแน่นอนว่าคุณจะต้องพบกับสัตว์ร้าย แต่ไม่ต้องห่วงหากคุณไม่ทำอะไรกับมันเรื่องร้ายคงไม่เกิด ภัยร้ายอีกนึงอย่างคือ Virus ที่จะทำให้จอมยุทธ์อ่อนแรงลง ขอให้คุณเดินทางอย่างปลอดภัยท่านจอมยุทธ์</h2>
-          <h2 style="text-decoration: underline;">ภัยร้ายต่างๆ</h2>
-          <div id="food">
             <figure>
-              <p><img src="https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif"
-                width="150" height="150">
-              <figcaption>เสือ</figcaption>
-              </figure>
-              <figure>
-              <p><img src="https://cdn.discordapp.com/attachments/796972397391511556/838459515124056134/New_Virus_clone.gif"
-                width="150" height="150">
-              <figcaption>Virus</figcaption>
+                <p style="cursor:pointer"><img src="https://cdn.discordapp.com/attachments/786852021315305473/823580071829962823/MiniTree_1.gif"width="100" onclick="vegetinfo()">
+                <figcaption>Vegetable</figcaption>
             </figure>
-          </div>
-          <button onclick="goMain()">MainMenu</button>
-          <button onclick="howToPlay()"><</button>
-        </interface>
-
-        <interface id="goodend-page">
-          <hds>Endding</hds>
-          <a class="button" href="https://meat-industry.netlify.app/">Endding</a>
-        </interface>
-
-        <interface id="badend-page">
-          <a class="button" href="https://meat-industry1.netlify.app/">Endding</a>
-        </interface>
-
-        <interface id="killed"><br>
-          <hds>Die</hds><br>
-          <h1>Try Again?</h1><br><br>
-          <button onclick="startGame()">Yes</button>
-          <a href="https://meat-industry.netlify.app/"><button>No</button></a>
-          <img src="" alt="">
-        </interface>
-
-        <canvas id="canvas"></canvas>
-        <div id="stats" style="padding: 10px; background-image: radial-gradient(circle, hsl(25, 34%, 40%), hsl(25, 27%, 52%), hsl(25, 34%, 40%)); height: 350px; margin:10px; border: 10px solid pink;border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;font-family: 'Amatic SC', cursive; font-size:large;color:white;">
-          <div id="progbar" style="width:300px; background: black">
-            <div id="myprog" style="width:0%; height:30px; background-image: linear-gradient(hsl(80, 100%, 62%), hsl(90, 100%, 49%), hsl(80, 100%, 62%));"></div>
-          </div>
-          <h1 id="hp" style="display:block; margin:3px;"></h1><br>
-          <div> 
-            <h1 style="display: inline;"><img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif" style="width:50px; margin:5px; display:inline-block;"><b id="meat_count">: 0</b></h1>
-          </div>
-          <div>
-            <h1 style="display: inline;"><img src="https://cdn.discordapp.com/attachments/820894723119644672/823580169188671508/MiniTree_1.gif" style="width:50px; margin:5px; display:inline-block;"><b id="vegg_count">: 0</b></h1>
-          </div>
-          <br></br>
-          <div id="tips">
-              <p>**กินเนื้อให้น้อยกินผักให้มาก**</p>
-          </div>
         </div>
+        <div id="food">
+            <figure>
+                <p style="cursor:pointer"><img src="https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif" width="100" onclick="tigerinfo()">
+                <figcaption>Tiger</figcaption>
+            </figure>
+            <figure>
+                <p style="cursor:pointer"><img src="https://cdn.discordapp.com/attachments/796972397391511556/838459515124056134/New_Virus_clone.gif" width="100" onclick="virusinfo()">
+                <figcaption>Disease</figcaption>
+            </figure>
+        </div>
+        <button onclick="goMain()">Back</button>
+    </interface>
 
-      </body>
-<script src="greenpea.js"></script>
+    <interface id="meat-info">
+        <hds>Meat</hds>
+        <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif" width="200px"></p>
+        <button onclick="howToPlay()">Back</button>
+    </interface>
+    <interface id="veget-info">
+        <hds>Vegetable</hds>
+        <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823580071829962823/MiniTree_1.gif" width="200px"></p>
+        <button onclick="howToPlay()">Back</button>
+    </interface>
+    <interface id="tiger-info">
+        <hds>Tiger</hds>
+        <p><img src="https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif" width="200px"></p>
+        <button onclick="howToPlay()">Back</button>
+    </interface>
+    <interface id="virus-info">
+        <hds>Disease</hds>
+        <p><img src="https://cdn.discordapp.com/attachments/796972397391511556/838459515124056134/New_Virus_clone.gif" width="200px"></p>
+        <button onclick="howToPlay()">Back</button>
+
+    </interface>
+
+    <interface id="goodend-page">
+        <hds>Endding</hds>
+        <a class="button" href="https://meat-industry1.netlify.app/%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%A7.html">Endding</a>
+    </interface>
+
+    <interface id="badend-page">
+        <a class="button" href="https://meat-industry1.netlify.app/index.html">Endding</a>
+    </interface>
+
+    <interface id="killed"><br>
+        <hds>Die</hds><br>
+        <h1>Try Again?</h1><br><br>
+        <button onclick="startGame()">Yes</button>
+        <button onclick="goMain()">No</button>
+
+        <img src="" alt="">
+    </interface>
+
+    <canvas id="canvas"></canvas>
+
+    <div id="stats" style="padding: 10px; background-image: radial-gradient(circle, hsl(25, 34%, 40%), hsl(25, 27%, 52%), hsl(25, 34%, 40%)); height: 350px; margin-left:10px; border: 10px solid pink;border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;font-family: 'Amatic SC', cursive; font-size:large;color:white;">
+        <div id="progbar" style="width:300px; background: black">
+            <div id="myprog" style="width:0%; height:30px; background-image: linear-gradient(hsl(80, 100%, 62%), hsl(90, 100%, 49%), hsl(80, 100%, 62%));"></div>
+        </div>
+        <h1 id="hp" style="display:block; margin:3px;"></h1><br>
+        <div> 
+            <h1 style="display: inline;">
+                <img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif" style="width:50px; margin:5px; display:inline-block;">
+                <b id="meat_count">: 0</b>
+            </h1>
+        </div>
+        <div>
+            <h1 style="display: inline;">
+                <img src="https://cdn.discordapp.com/attachments/820894723119644672/823580169188671508/MiniTree_1.gif" style="width:50px; margin:5px; display:inline-block;">
+                <b id="vegg_count">: 0</b>
+            </h1>
+        </div>
+        <br></br>
+        <div id="tips">
+            <p>**กินเนื้อให้น้อยกินผักให้มาก**</p>
+        </div><br><br>
+        <button onclick="goMain()">Main Menu</button><br><br>
+        <a href="https://meat-industry1.netlify.app/" style="margin:5px;"><button>Campagne</button></a>
+    </div>
+</body>
+<script src="greenpeace.js"></script>
 </html>
