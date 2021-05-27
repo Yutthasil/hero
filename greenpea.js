@@ -11,7 +11,6 @@ var Keys = {
     right: false
 };
 
-
 var myGameArea = { //canvas setting + keyboard input
     canvas : document.getElementById("canvas"),
     start : function() {
