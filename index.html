@@ -8,10 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sigmar+One">
+
     <style>
-        *{
-            position:relative;
-        }
         body{
             display:flex;
             justify-content: center;
@@ -30,7 +29,7 @@
             justify-content:center;
             text-align: center;
             padding:30px;
-            width: 600px;
+            width: 500px;
             height: 600px;
             border: 15px solid;
             border-image: repeating-linear-gradient( 45deg, green, hsl(76, 57%, 51%) 1%, hsl(24, 60%, 23%) 1%, hsl(25, 34%, 39%) 8%) 10;
@@ -57,7 +56,6 @@
             transform: scale(0.95);
         }
         hds{
-            font-family: 'Chakra Petch', sans-serif;
             color:#E3C6AD;
             font-size: 32px;
         }
@@ -69,10 +67,6 @@
         }
         #stats, #canvas, #dshowto, #dshowto2, #goodend-page, #badend-page, #killed, #meat-info, #veget-info, #tiger-info, #virus-info{
             display: none;
-        }
-        @keyframes moving {
-            from {top:100px;}
-            to {top:0px;}
         }
         @keyframes cursorover {
             50%{
@@ -88,26 +82,40 @@
             color: white
         }
         span{
-            border: 1px solid black;
-            padding: 5px;
+            border: 2px solid black;
+            padding-left: 5px;
+            padding-right: 5px;
             margin: 5px;
             background: #B67B65;
+            cursor: pointer;
+        }
+        span:hover{
+            background: white;
+        }
+        mark{
+            background:none;
+            text-decoration: underline;
+        }
+        @keyframes squezz{
+            25%{transform: rotatez(2deg);}
+            50%{transform: scale(1.05);}
+            100%{transform: scale(1) rotatez(-2deg);}
         }
 
     </style>
 </head>
 <body onload="display()">
     <interface id="dsplay" style="display:inline">
-        <hds >ADAPTICUS</hds><br><br>
-        <img  src="https://cdn.discordapp.com/attachments/820894723119644672/823820115678068746/Hero_clone_2.gif" style="width: 300px;; height: 300px;;"><br><br><br><br><br>
-        <button onclick="startGame()">Click here to START</button><br><br>
+        <div style="animation: squezz 1s alternate infinite; font-family: 'Sigmar One', cursive; background:#7e5c50; border-radius: 20px;"><hds style="color: #da7d3f;">ADAPTICUS</hds></div><br><br>
+        <img  src="https://cdn.discordapp.com/attachments/820894723119644672/823820115678068746/Hero_clone_2.gif" style="width: 270px;"><br><br><br><br><br>
+        <button onclick="startGame()">START</button><br><br>
         <button onclick="howToPlay()">How to play</button><br><br>
         <a href="https://meat-industry1.netlify.app/" style="margin:5px;"><button>Campagne</button></a>
     </interface>
 
     <interface id="dshowto">
         <hds>How to Play</hds>
-        <h2>Use<span>◀</span><span>▲</span><span>▼</span><span>▶</span>to control your character</h2>
+        <h2>Use<span>◀</span><span>▲</span><span>▼</span><span>▶</span>to move your character</h2>
         <h2>You will find these things in the jungle</h2>
         <div id="food">
             <figure>
@@ -135,32 +143,36 @@
     <interface id="meat-info">
         <hds>Meat</hds>
         <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823554666125983784/Meat_1.gif" width="200px"></p>
+        <h2>Eat <mark>Meat</mark> and get 3 power</h2>
         <button onclick="howToPlay()">Back</button>
     </interface>
     <interface id="veget-info">
         <hds>Vegetable</hds>
         <p><img src="https://cdn.discordapp.com/attachments/786852021315305473/823580071829962823/MiniTree_1.gif" width="200px"></p>
+        <h2>Eat <mark>Vegetable</mark> and get 1 power</h2>
         <button onclick="howToPlay()">Back</button>
     </interface>
     <interface id="tiger-info">
         <hds>Tiger</hds>
         <p><img src="https://cdn.discordapp.com/attachments/820894723119644672/823845422165393468/Tiger_1.gif" width="200px"></p>
+        <h2>If you hit a <mark>Tiger</mark> you will lose 💗 and go back to start point</h2>
         <button onclick="howToPlay()">Back</button>
     </interface>
     <interface id="virus-info">
         <hds>Disease</hds>
         <p><img src="https://cdn.discordapp.com/attachments/796972397391511556/838459515124056134/New_Virus_clone.gif" width="200px"></p>
+        <h2>If you hit a <mark>Disease</mark> you will lose 💗 and power is reduced to 0 then go back to start point</h2>
         <button onclick="howToPlay()">Back</button>
 
     </interface>
 
     <interface id="goodend-page">
         <hds>Endding</hds>
-        <a class="button" href="https://meat-industry1.netlify.app/%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%A7.html">Endding</a>
+        <a class="button" href="https://meat-industry1.netlify.app/%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%A7.html">Ending</a>
     </interface>
 
     <interface id="badend-page">
-        <a class="button" href="https://meat-industry1.netlify.app/index.html">Endding</a>
+        <a class="button" href="https://meat-industry1.netlify.app/index.html">Ending</a>
     </interface>
 
     <interface id="killed"><br>
@@ -199,5 +211,5 @@
         <a href="https://meat-industry1.netlify.app/" style="margin:5px;"><button>Campagne</button></a>
     </div>
 </body>
-<script src="greenpea.js"></script>
+<script src="greenpeace.js"></script>
 </html>
